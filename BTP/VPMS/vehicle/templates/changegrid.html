@@ -1,0 +1,466 @@
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+
+
+    <!-- Title Page-->
+    <title>VPMS - Add Vehicle</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet" media="all">
+    <script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null };
+    </script>
+    <style>
+        /* .parking-space {
+        fill: green;
+        stroke: #fff;
+        stroke-width: 1px;
+        }
+
+        .parking-space.unavailable {
+        fill: red;
+        } */
+        .parking-space{
+            background:black;
+            /* background-image:url("https://www.kindpng.com/picc/m/192-1929555_car-png-images-top-view-car-up-view.png"); */
+                            /* width:100px;height:100px; */
+                            color:white;
+                            border:1px solid white;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+                            cursor:pointer;
+        }
+        .unavailable>rect{
+            /* background-image:url("https://www.kindpng.com/picc/m/192-1929555_car-png-images-top-view-car-up-view.png"); */
+                            /* width:100px;height:100px; */
+                            color:white;
+                            border:1px solid white;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;
+
+        }
+        .unavailable>rect{
+            fill: none;
+        }
+
+        /* .unavailable>image{
+            width: 100%;
+            height: 100%;
+        } */
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+         {% include 'sidebar.html' %}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            {% include 'header.html' %}
+
+    <div class="mainparking" style="margin-top: 100px;">
+        <div class="mainMap">
+            <div classname="title" style="display:flex;justify-content: center;align-items: center;color: black;font-size: larger;">
+                Parking Map Grid Selection
+                <!-- {{vehicle}} -->
+                
+            </div>
+            <div>
+                <br>
+                <center><button onclick="next();"  id="next" style="background-color: white;border-radius:10px;width:100px;height:50px">Submit</button></center>
+                <br>
+                <div style="display:flex;align-items: center;justify-content: space-evenly;">
+                <br>
+                <center><button onclick="increase();"  id="next" style="background-color: white;border-radius:10px;width:100px;height:50px">Increase</button></center>
+                <br>
+                <br>
+                <center><button onclick="decrease();"  id="next" style="background-color: white;border-radius:10px;width:100px;height:50px">Decrease</button></center>
+                <br>
+                <br>
+                </div>
+                <br>
+            </div>
+            
+            <div style="position:absolute; z-index:10px;width:80%">
+                <!-- <div id='floor1' style="margin-top: 30px;display:flex;justify-content:left;align-items: center;flex-wrap: wrap;">
+                </div> -->
+                <center>
+                <!-- <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;"> -->
+                <!-- <center><h2>Floor Wise Parking Map</h2></center> -->
+                <br>
+                <br>
+                <div id="parking-lot"></div>
+                <!-- <br>
+                <br> -->
+                <!-- </div> -->
+                </center>
+                
+                {% block contentone %}
+                <script src="https://d3js.org/d3.v7.min.js"></script>
+
+                <script>
+                    var arrayone = [];
+                    function next(){
+                        var opcode ='-'
+                        for (let i=0;i<arrayone.length;i++){
+                            opcode = opcode+(arrayone[i])
+                            opcode = opcode+'-'
+                        }
+                        var urlo = 'enable_disable/'+opcode;
+                        window.location=urlo;
+                        // console.log(urlo);
+                    }
+                    function increase(){
+                        var urlo = 'increase';
+                        window.location=urlo;
+                    }
+                    function decrease(){
+                        var urlo = 'decrease';
+                        window.location=urlo;
+                    }
+                    var pd = JSON.parse('{{ parking_data|safe }}')
+                    const data = {
+                        
+                        // size: { width: 400, height: 300 },
+                        // spaces: [
+                        //     { x: 10, y: 10, width: 80, height: 80, id: 1 },
+                        //     { x: 100, y: 10, width: 80, height: 80, id: 2 },
+                        //     { x: 190, y: 10, width: 80, height: 80, id: 3 },
+                        //     { x: 280, y: 10, width: 80, height: 80, id: 4 },
+                        //     { x: 280, y: 100, width: 80, height: 80, id: 5 },
+                        //     { x: 280, y: 190, width: 80, height: 80, id: 6 },
+                        //     { x: 190, y: 190, width: 80, height: 80, id: 7 },
+                        //     { x: 100, y: 190, width: 80, height: 80, id: 8 },
+                        //     { x: 10, y: 190, width: 80, height: 80, id: 9 },
+                        // ],
+                        size: pd.size,
+                        spaces: pd.spaces,
+                        };
+
+                        var svg = d3.select('#parking-lot')
+                        .append('svg')
+                        .attr('width', data.size.width)
+                        .attr('height', data.size.height);
+
+                        var spaces = svg.selectAll('rect')
+                        .data(data.spaces)
+                        .enter()
+                        .append('g')
+                        .attr('idone',function(d){return d.id;})
+                        .on("click",async function(d) {
+                            var temp = d3.select(this).attr('idone')
+                            // console.log(document.getElementById(temp))
+                            // var arr = {{already_live|safe}}
+                            // var opcode = 0;
+                            if (pd.spaces[parseInt(temp)-1].inc==2){
+                                alert('You cannot modify parking spaces where a car is already present');
+                                // console.log(arrayone);
+                            }else{
+
+                            
+                            if (arrayone.includes(parseInt(temp))){
+                                const index = arrayone.indexOf(parseInt(temp)); // find the index of the element to remove
+                                if (index !== -1) {
+                                    arrayone.splice(index, 1); // remove the element at the index
+                                }
+                                opcode = temp;
+                                if (pd.spaces[parseInt(temp)-1].inc==1){
+                                    pd.spaces[parseInt(temp)-1].inc=0;
+                                    // document.getElementById(temp).setAttribute("href",null)
+                                    // document.getElementById(temp).removeAttribute("href");
+                                    // document.getElementById(temp).setAttribute("src", "");
+                                    document.getElementById(temp).style.display='none';
+                                }else if (pd.spaces[parseInt(temp)-1].inc==0){
+                                    pd.spaces[parseInt(temp)-1].inc=1;
+                                    document.getElementById(temp).setAttribute("href","https://media.istockphoto.com/id/1235662202/vector/car-automobile-parking-sign-icon-with-circle-shape.jpg?s=612x612&w=0&k=20&c=aCyUQ4jmvTUfYN4fwcC_1KcYyQOsIdRotOA6FcifJcg=")
+                                    document.getElementById(temp).style.display='block';
+                                }else{
+                                    alert('You cannot modidy a parking space where a car is already present');
+                                }
+                                
+
+                            }else{
+                                arrayone.push(parseInt(temp))
+                                if (pd.spaces[parseInt(temp)-1].inc==1){
+                                    pd.spaces[parseInt(temp)-1].inc=0;
+                                    // document.getElementById(temp).setAttribute("href",null)
+                                    // document.getElementById(temp).removeAttribute("href");
+                                    // document.getElementById(temp).setAttribute("src", "");
+                                    document.getElementById(temp).style.display='none';
+
+                                }else if (pd.spaces[parseInt(temp)-1].inc==0){
+                                    pd.spaces[parseInt(temp)-1].inc=1;
+                                    document.getElementById(temp).setAttribute("href","https://media.istockphoto.com/id/1235662202/vector/car-automobile-parking-sign-icon-with-circle-shape.jpg?s=612x612&w=0&k=20&c=aCyUQ4jmvTUfYN4fwcC_1KcYyQOsIdRotOA6FcifJcg=")
+                                    document.getElementById(temp).style.display='block';
+                                }else{
+                                    alert('You cannot modidy a parking space where a car is already present');
+                                }
+                                opcode = temp;
+                            }
+                            // console.log(arrayone);
+                            }
+                            
+                            
+                        });
+                        
+
+                        spaces.append('rect')
+                        .attr('class', 'parking-space')
+                        .attr('x', function(d) { return d.x; })
+                        .attr('y', function(d) { return d.y; })
+                        .attr('width', function(d) { return d.width; })
+                        .attr('height', function(d) { return d.height; })
+                        // .attr('id',function(d){return d.id;});
+
+                        spaces.append('text')
+                        .attr('x', function(d) { return d.x + d.width / 2; })
+                        .attr('y', function(d) { return d.y + d.height / 2; })
+                        .attr('text-anchor', 'middle')
+                        .attr('alignment-baseline', 'middle')
+                        .attr('fill', 'white')
+                        // .attr('id',function(d){return d.id;})
+                        .text(function(d) { return d.id; });
+                        // var unavailableSpaces = JSON.parse('{{ slots_filled|safe }}');
+                        spaces.append('image')
+                        .attr('x', function(d) { return d.x; })
+                        .attr('y', function(d) { return d.y; })
+                        .attr('width', function(d) { return d.width; })
+                        .attr('height', function(d) { return d.height; })
+                        .attr('id',function(d){return d.id;})
+                        .attr('xlink:href', function(d) {
+                            console.log(d.inc)
+                            if (d.inc==1) {
+                                
+                                return 'https://media.istockphoto.com/id/1235662202/vector/car-automobile-parking-sign-icon-with-circle-shape.jpg?s=612x612&w=0&k=20&c=aCyUQ4jmvTUfYN4fwcC_1KcYyQOsIdRotOA6FcifJcg=';
+                            }else if (d.inc==2){
+                                return 'https://media.istockphoto.com/id/1256522275/vector/red-sedan-semi-flat-rgb-color-vector-illustration.jpg?s=612x612&w=0&k=20&c=K-Ud7A-4CAo-ZlKWsXg-5qupVLDXfaD90s6tVpGFTM4='
+                            }
+                             else {
+                                return null;
+                            }
+                        });
+                        
+
+
+                        
+                        // unavailableSpaces.forEach(function(spaceIndex) {
+                        // spaces.filter(function(d, i) { return d.id === spaceIndex; })
+                        //     .classed('unavailable', true);
+                        // });
+
+                        
+                        
+
+
+                </script>
+                
+                {% endblock %}
+            </div>
+            
+
+        </div>
+ 
+    </div>
+    
+    
+    
+</body>
+{% if err == "yes" %}
+    <script>
+        alert("You cannot decrease the grids as there is a car present in one of the slots");
+    </script>
+{% endif %}
+
+
+<!-- <script>
+    function next(){
+        window.location=('{% url 'manage_incomingvehicle' %}');
+    }
+    
+    const vehicleObj=JSON.parse('{{ vehicle|safe }}')
+    console.log(vehicleObj);
+    previouslySelctedIndex=Number(vehicleObj.slotID);
+    async function  insertCarToSlot(previouslySelctedIndex,currentSelectedIndex){
+        // var data = type({{ vehicle }})
+        // document.getElementById('next').style.display = block;
+        
+        const vehicleObj=JSON.parse('{{ vehicle|safe }}')
+        const previousSlot=document.getElementById(`slot_${previouslySelctedIndex}`);
+        const currentSlot=document.getElementById(`slot_${currentSelectedIndex}`);
+        previousSlot.innerHTML=`<div 
+                            style="background:black;
+                            width:100px;height:100px;
+                            color:white;
+                            border:1px solid white;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;">
+                                ${previouslySelctedIndex}
+                            <div/>`
+        currentSlot.innerHTML=`<div 
+                            style="background:black;
+                            width:100px;height:100px;
+                            color:white;
+                            border:1px solid white;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;">
+                                <img id="c2" class="car" src="{% static 'images/car.png' %}" style="width:50px;height:90px"/>
+                            <div/>`
+        try {
+           const res=await fetch(`http://127.0.0.1:8000/update_slot/${vehicleObj.id}/${currentSelectedIndex}`, {
+                        method: 'GET',
+                        headers: {
+                        'Content-Type': 'application/json'
+                        }
+                    })
+            console.log(res);
+            alert(res.status);
+        } catch (error) {
+            console.log(error);
+            alert('error while saving')
+        }                 
+    }
+    for (let i = 1; i <= 9; i++) {
+        const div = document.createElement('div');
+        const floor1Div=document.getElementById('floor1');
+        // console.log(floor1Div);
+        div.className = 'slot';
+        div.id=`slot_${i}`;
+        if ({{slots_filled}}.includes(i)){
+            div.innerHTML = `<div 
+                            style="background:black;
+                            width:100px;height:100px;
+                            color:white;
+                            border:1px solid white;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;">
+                            <img id="c2" class="car" src="{% static 'images/car2.png' %}" style="width:50px;height:90px"/>
+                            <div/>`;
+        }
+        else{
+            div.innerHTML = `<div 
+                            style="background:black;
+                            width:100px;height:100px;
+                            color:white;
+                            border:1px solid white;
+                            display:flex;
+                            justify-content:center;
+                            align-items:center;">
+                                ${i}
+                            <div/>`;
+        }
+        
+        div.onclick = function() {
+            console.log(previouslySelctedIndex)
+            if ({{slots_filled}}.includes(i)) {
+                alert(`Slot ${i} is already filled!`);
+            }else{
+                alert(`Clicked on div ${i}!`);
+                if (previouslySelctedIndex===0){
+                    previouslySelctedIndex=i;
+                }
+                insertCarToSlot(previouslySelctedIndex,i);
+                previouslySelctedIndex=i;
+                
+                const button = document.getElementById('next');
+                button.disabled = false;
+            }
+            
+            
+
+        };
+        floor1Div.appendChild(div);
+    }
+    insertCarToSlot(previouslySelctedIndex,previouslySelctedIndex);
+
+</script>  -->
+
+
+</html>
+
+{% endblock %}
+
+<!-- <div style="margin-top: 227px;">
+    <div class="slot" style="margin-left: 10px; width: 74px;"><img id="c10" style="margin-left: 0px;" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c11" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c12" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c13" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c14" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c15" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c16" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c17" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot" style="width: 74px;"><img id="c18" class="car" src="{% static 'images/car2.png' %}"/></div>
+</div>
+
+<div style="margin-top: 401px;">
+    <div class="slot" style="margin-left: 10px; width: 74px;"><img id="c19" style="margin-left: 0px;" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot"><img id="c20" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot"><img id="c21" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot"><img id="c22" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot"><img id="c23" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot"><img id="c24" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot"><img id="c25" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot"><img id="c26" class="car" src="{% static 'images/car.png' %}"/></div>
+    <div class="slot" style="width: 74px;"><img id="c27" class="car" src="{% static 'images/car.png' %}"/></div>
+</div>
+
+<div style="margin-top: 598px;">
+    <div class="slot" style="margin-left: 10px; width: 74px;"><img id="c28" style="margin-left: 0px;" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c29" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c30" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c31" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c32" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c33" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c34" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot"><img id="c35" class="car" src="{% static 'images/car2.png' %}"/></div>
+    <div class="slot" style="width: 74px;"><img id="c36" class="car" src="{% static 'images/car2.png' %}"/></div>
+</div> -->
+                        <!-- <div class="slot" style="margin-left: 10px; width: 74px;">
+                            <img id="c1" style="margin-left: 0px;" class="car" src="{% static 'images/car.png' %}"/>
+                        </div> -->
+                        <!-- <div class="slot"><img id="c2" class="car" src="{% static 'images/car.png' %}"/></div>
+                        <div class="slot"><img id="c3" class="car" src="{% static 'images/car.png' %}"/></div>
+                        <div class="slot"><img id="c4" class="car" src="{% static 'images/car.png' %}"/></div>
+                        <div class="slot"><img id="c5" class="car" src="{% static 'images/car.png' %}"/></div>
+                        <div class="slot"><img id="c6" class="car" src="{% static 'images/car.png' %}"/></div>
+                        <div class="slot"><img id="c7" class="car" src="{% static 'images/car.png' %}"/></div>
+                        <div class="slot"><img id="c8" class="car" src="{% static 'images/car.png' %}"/></div>
+                        <div class="slot" style="width: 74px;"><img id="c9" class="car" src="{% static 'images/car.png' %}"/></div> -->

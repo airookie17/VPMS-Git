@@ -1,0 +1,191 @@
+ {% load static %}
+
+{% block body %}
+
+
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Dashboard</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="{% static 'css/font-face.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-4.7/css/font-awesome.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/font-awesome-5/css/fontawesome-all.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/mdi-font/css/material-design-iconic-font.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="{% static 'vendor/bootstrap-4.1/bootstrap.min.css' %}" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="{% static 'vendor/animsition/animsition.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/wow/animate.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/slick/slick.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/select2/select2.min.css' %}" rel="stylesheet" media="all">
+    <link href="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.css' %}" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="{% static 'css/theme.css' %}" rel="stylesheet" media="all">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+
+
+        <!-- MENU SIDEBAR-->
+         {% include 'sidebar.html' %}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            {% include 'header.html' %}
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            
+            <div class="main-content" id="mc">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+
+
+                        <div class="row m-t-25">
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="overview-item overview-item--c1">
+                                    <div class="overview__inner">
+                                        <div class="overview-box clearfix">
+                                            <div class="icon">
+                                                <span><i class="fa fa-car"></i></span>
+                                            </div>
+                                            <div class="text">
+                                                <h2>{{Instatus}}</h2>
+                                                <span>Total Vehicles In Parking</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                          
+
+
+                           
+
+
+
+
+
+                          
+
+{% include 'footer.html' %}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+
+    </div>
+    <div id="lorem" style="width:70%;margin-left:25%">
+        <center><img src="https://purepng.com/public/uploads/large/purepng.com-silver-land-rover-discovery-car-sidecarvehicletransportland-rover-961524658534ntle2.png" style="width:300px;margin-top: 150px;"></center>
+        <!-- <center><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></center> -->
+        <center><p>Hello User! Welcome to <strong>Drive<i>IN</i></strong>.</p></center>
+        
+        <p>Parking made easy. Book your desired slot when you need it!</p>
+        <p></p>
+        <p></p>
+        <p>Just follow these instructions:</p>
+        <p></p>
+        <p>1. Click on <strong>Add Vehicle</strong> in the sidebar.</p>
+        <p></p>
+        <p>2. Enter your details and click on <strong>Next</strong>.</p>
+        <p></p>
+        <p>3. Select your slot and click on <strong>Submit</strong>.</p>
+        <p></p>
+        <p>Thats it! You have successfully booked your slot. Just drive in and park your vehicle. It's as simple as that.</p>
+        <p>Forgot where you parked your car? Don't worry! You can check your slot anytime by just clicking on your Parking Number.</p>
+    </div>
+    <!-- Jquery JS-->
+    <script src="{% static 'vendor/jquery-3.2.1.min.js' %}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{% static 'vendor/bootstrap-4.1/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-4.1/bootstrap.min.js' %}"></script>
+    <!-- Vendor JS       -->
+    <script src="{% static 'vendor/slick/slick.min.js' %}">
+    </script>
+    <script src="{% static 'vendor/wow/wow.min.js' %}"></script>
+    <script src="{% static 'vendor/animsition/animsition.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap-progressbar/bootstrap-progressbar.min.js' %}">
+    </script>
+    <script src="{% static 'vendor/counter-up/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'vendor/counter-up/jquery.counterup.min.js' %}">
+    </script>
+    <script src="{% static 'vendor/circle-progress/circle-progress.min.js' %}"></script>
+    <script src="{% static 'vendor/perfect-scrollbar/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'vendor/chartjs/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/select2/select2.min.js' %}">
+    </script>
+
+    <!-- Main JS-->
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
+<!-- end document-->
+<script>
+    // Get the value of request.user.is_staff and parse it as a boolean
+    var isStaff = JSON.parse('{{ request.user.is_staff|lower}}');
+    
+    // Hide or show the hide_to_nonstaff element depending on the value of isStaff
+    if (!isStaff) {
+        document.getElementById('mc').style.display = 'none';
+    }else{
+        document.getElementById('lorem').style.display = 'none';
+    }
+</script>
+{% if error == "no_active" %}
+<script>
+    alert('No Vehicle with Current Parking Number and In status found');
+</script>
+{% endif %}
+{% if err == "yes" %}
+    <script>
+        alert("You cannot decrease the grids as there is a car present in one of the slots or if any slot is active or live");
+        var urlo = 'changegrid';
+        window.location = urlo;
+    </script>
+{% endif %}
+{% if err == "no" %}
+    <script>
+        
+        var urlo = 'changegrid';
+        window.location = urlo;
+    </script>
+{% endif %}
+{% if err == "dont" %}
+    <script>
+        alert("atleast 12 grid boxes are compulsary");
+        var urlo = 'changegrid';
+        window.location = urlo;
+    </script>
+{% endif %}
+
+ {% endblock %}

@@ -1,0 +1,57 @@
+[
+    {
+      "name": "A1",
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "description": "Compact"
+    },
+    {
+      "name": "A2",
+      "lat": 37.7749,
+      "lng": -122.4193,
+      "description": "SUV"
+    },
+    {
+      "name": "A3",
+      "lat": 37.7749,
+      "lng": -122.4192,
+      "description": "Electric"
+    },
+    {
+      "name": "B1",
+      "lat": 37.7748,
+      "lng": -122.4194,
+      "description": "Motorcycle"
+    },
+    {
+      "name": "B2",
+      "lat": 37.7748,
+      "lng": -122.4193,
+      "description": "Compact"
+    },
+    {
+      "name": "B3",
+      "lat": 37.7748,
+      "lng": -122.4192,
+      "description": "SUV"
+    },
+    {
+      "name": "C1",
+      "lat": 37.7747,
+      "lng": -122.4194,
+      "description": "SUV"
+    },
+    {
+      "name": "C2",
+      "lat": 37.7747,
+      "lng": -122.4193,
+      "description": "Electric"
+    },
+    {
+      "name": "C3",
+      "lat": 37.7747,
+      "lng": -122.4192,
+      "description": "Motorcycle"
+    }
+  ]
+  

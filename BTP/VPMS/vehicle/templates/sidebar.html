@@ -1,0 +1,78 @@
+<aside class="menu-sidebar d-none d-lg-block">
+            <div class="logo">
+
+                   <h1>Drive<i>IN</i></h1>
+            </div>
+            <div class="menu-sidebar__content js-scrollbar1" style="border-color:black;border-right-width:1px;border-style:solid">
+                <nav class="navbar-sidebar" >
+                    <ul class="list-unstyled navbar__list">
+                        <li>
+                            <a href="{% url 'admin_home' %}"  style="color: blue">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                        </li>
+
+                        
+                       
+
+
+                        <li>
+                            <a href="{% url 'add_vehicle' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>Add Vehicle</a>
+                        </li>
+                        <div id="hide_to_nonstaff">
+                        <li>
+                            <a href="{% url 'manage_incomingvehicle' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>Manage In Vehicle</a>
+                        </li>
+
+                         <li>
+                            <a href="{% url 'manage_outgoingvehicle' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>Manage Out Vehicle</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'monthly_bills' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>Monthly Bills</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'changegrid' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>Modify Map</a>
+                        </li>
+                        </div>
+                        <div id="hide_to_staff">
+                        <li>
+                            <a href="{% url 'manage_incomingvehicle' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>In status</a>
+                        </li>
+
+                         <li>
+                            <a href="{% url 'manage_outgoingvehicle' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>Out Status</a>
+                        </li>
+                        {% if request.user.last_name != 'visitor' %}
+                         <li>
+                            <a href="{% url 'monthly_bills' %}"  style="color: blue">
+                                <i class="fa fa-car"></i>Monthly Bills</a>
+                        </li>
+                        {% endif %}
+                        
+                        </div>
+
+
+
+
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <script>
+            // Get the value of request.user.is_staff and parse it as a boolean
+            var isStaff = JSON.parse('{{ request.user.is_staff|lower}}');
+            
+            // Hide or show the hide_to_nonstaff element depending on the value of isStaff
+            if (!isStaff) {
+                document.getElementById('hide_to_nonstaff').style.display = 'none';
+            }else{
+                document.getElementById('hide_to_staff').style.display = 'none';
+            }
+        </script>
+        
